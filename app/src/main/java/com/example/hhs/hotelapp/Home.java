@@ -179,26 +179,32 @@ public class Home extends FragmentActivity implements OnMapReadyCallback,SeekBar
 //            if (dialog.isShowing()) {
 //                dialog.dismiss();
 //            }
-            for (int i = 0; i < result.size(); i++) {
-                mMap.addMarker(new MarkerOptions()
-                        .title(result.get(i).getName())
-                        .position(
-                                new LatLng(result.get(i).getLatitude(), result
-                                        .get(i).getLongitude()))
-                        .icon(desc)
-                        .snippet(result.get(i).getVicinity()));
+            try {
+                for (int i = 0; i < result.size(); i++) {
+                    mMap.addMarker(new MarkerOptions()
+                            .title(result.get(i).getName())
+                            .position(
+                                    new LatLng(result.get(i).getLatitude(), result
+                                            .get(i).getLongitude()))
+                            .icon(desc)
+                            .snippet(result.get(i).getVicinity()));
+                }
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(result.get(0).getLatitude(), result
+                                .get(0).getLongitude())) // Sets the center of the map to
+                        // Mountain View
+                        .zoom(14) // Sets the zoom
+                        .tilt(30) // Sets the tilt of the camera to 30 degrees
+                        .build(); // Creates a CameraPosition from the builder
+                mMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(cameraPosition));
+                RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(Home.this, allItems);
+                setAdap(rcAdapter);
             }
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(result.get(0).getLatitude(), result
-                            .get(0).getLongitude())) // Sets the center of the map to
-                    // Mountain View
-                    .zoom(14) // Sets the zoom
-                    .tilt(30) // Sets the tilt of the camera to 30 degrees
-                    .build(); // Creates a CameraPosition from the builder
-            mMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(cameraPosition));
-            RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(Home.this, allItems);
-            setAdap(rcAdapter);
+            catch(Exception e)
+            {
+                
+            }
         }
 
         @Override
