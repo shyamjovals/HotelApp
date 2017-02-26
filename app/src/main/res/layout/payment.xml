@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/r1">
+
+        <include layout="@layout/card_view"></include>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/r1"
+        android:background="#fff"
+        android:paddingBottom="10dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_above="@+id/r1"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:text="MAKE PAYMENT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pay"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:fontFamily="serif"
+            android:textColor="@color/colorAccent"
+            android:textStyle="normal|bold"
+            android:layout_margin="5dp"
+            android:paddingTop="10dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
