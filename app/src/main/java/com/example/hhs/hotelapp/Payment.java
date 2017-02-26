@@ -36,13 +36,14 @@ public class Payment extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MyRecyclerViewAdapter(getDataSet());
+       // mAdapter = new MyRecyclerViewAdapter(getDataSet());
+        mAdapter = new MyRecyclerViewAdapter(Dist.foods);
         mRecyclerView.setAdapter(mAdapter);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         pay = (TextView) findViewById(R.id.pay);
-
+        pay.setText(pay.getText()+" : "+String.valueOf(Dist.amount));
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

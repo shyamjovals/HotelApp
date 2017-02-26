@@ -24,8 +24,10 @@ public class MyRecyclerViewAdapter extends RecyclerView
         .Adapter<MyRecyclerViewAdapter
         .DataObjectHolder> {
     private static String LOG_TAG = "MyRecyclerViewAdapter";
-    private ArrayList<DataObject> mDataset;
+    private ArrayList<DataObject> mDataset,fooddata;
+    int quant;
     private static MyClickListener myClickListener;
+
 
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
@@ -58,6 +60,7 @@ public class MyRecyclerViewAdapter extends RecyclerView
     }
 
     public MyRecyclerViewAdapter(ArrayList<DataObject> myDataset) {
+        fooddata=new ArrayList<>();
         mDataset = myDataset;
     }
 
@@ -102,6 +105,7 @@ public class MyRecyclerViewAdapter extends RecyclerView
 
                 numberpicker.setMaxValue(11);
 
+
                 numberpicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                     @Override
                     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -109,6 +113,7 @@ public class MyRecyclerViewAdapter extends RecyclerView
 
 
                         textview.setText("Quantity : "+ newVal);
+                        quant=newVal;
                     }
                 });
 
@@ -118,6 +123,11 @@ public class MyRecyclerViewAdapter extends RecyclerView
 
 
                         //adapter
+                       // fooddata.add(mDataset.get(position));
+                        int cost=mDataset.get(position).getmText4()*quant;
+                        fooddata.add(new DataObject(mDataset.get(position).getmText1()+" : "+quant,mDataset.get(position).getmText2(),String.valueOf(cost)));
+                        Dist.foods=new ArrayList<DataObject>(fooddata);
+                        Dist.amount=Dist.amount+cost;
                         num.dismiss();
                     }
                 });

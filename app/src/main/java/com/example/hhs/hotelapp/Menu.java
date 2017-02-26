@@ -140,8 +140,8 @@ public class Menu extends Fragment {
         desc.add("Sprite, Lemonade,Fanta....");
 
         rate.add(266);
-        rate.add(266);
-        rate.add(266);
+        rate.add(234);
+        rate.add(216);
         rate.add(733);
         rate.add(999);
         rate.add(1132);
@@ -164,7 +164,7 @@ public class Menu extends Fragment {
 
 
         for (int index = 0; index < 15; index++) {
-            DataObject obj = new DataObject(foods.get(index).toString(), desc.get(index).toString(), "Price = "+rate.get(index)+"/-");
+            DataObject obj = new DataObject(foods.get(index).toString(), desc.get(index).toString(), rate.get(index).toString());
             results.add(index, obj);
         }
         return results;
