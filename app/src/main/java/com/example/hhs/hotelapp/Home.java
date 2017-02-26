@@ -154,7 +154,7 @@ public class Home extends FragmentActivity implements OnMapReadyCallback,SeekBar
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         // Add a marker in Sydney and move the camera
         //    LatLng TutorialsPoint = new LatLng(21, 57);
-        markerx = mMap.addMarker(new MarkerOptions().position(mylatlang).title("Me").icon(BitmapDescriptorFactory.defaultMarker()));
+//        markerx = mMap.addMarker(new MarkerOptions().position(mylatlang).title("Me").icon(BitmapDescriptorFactory.defaultMarker()));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(mylatlang));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mylatlang, 12.0f));

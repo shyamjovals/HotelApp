@@ -25,6 +25,7 @@ import java.util.List;
 public class Hotel_indi extends AppCompatActivity {
 
     public TabLayout tabLayout;
+    public static String hotel_name;
     public ViewPager viewPager;
     public int[] tabIcons = {
             R.drawable.ic_action_name2,
@@ -46,7 +47,13 @@ public class Hotel_indi extends AppCompatActivity {
 //        setupTabIcons();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    try{
+        hotel_name=this.getIntent().getExtras().get("hotel").toString();
+    }
+    catch(Exception e)
+    {
 
+    }
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 

@@ -26,6 +26,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
     public void onClick(View view) {
         Toast.makeText(view.getContext(), "Clicked Hotel Position = " + getPosition(), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(view.getContext(),Hotel_indi.class);
+        i.putExtra("hotel",hotel_name.getText().toString());
         view.getContext().startActivity(i);
     }
 }
