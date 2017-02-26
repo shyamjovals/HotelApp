@@ -154,7 +154,7 @@ public class Home extends FragmentActivity implements OnMapReadyCallback,SeekBar
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         // Add a marker in Sydney and move the camera
         //    LatLng TutorialsPoint = new LatLng(21, 57);
-        markerx = mMap.addMarker(new MarkerOptions().position(mylatlang).title(""));
+//        markerx = mMap.addMarker(new MarkerOptions().position(mylatlang).title("Me").icon(BitmapDescriptorFactory.defaultMarker()));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(mylatlang));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mylatlang, 12.0f));
     }
@@ -261,6 +261,9 @@ public class Home extends FragmentActivity implements OnMapReadyCallback,SeekBar
         location=new android.location.Location(LocationManager.GPS_PROVIDER);
         location.setLatitude(curlat);
         location.setLongitude(curlong);
+        mylatlang = new LatLng(curlat, curlong);
+        markerx = mMap.addMarker(new MarkerOptions().position(mylatlang).title("Me").icon(BitmapDescriptorFactory.defaultMarker()));
+
         System.out.println("Your location2 is"+location);
         if (location == null) {
             locationManager.requestLocationUpdates(provider, 0, 0, listener);
