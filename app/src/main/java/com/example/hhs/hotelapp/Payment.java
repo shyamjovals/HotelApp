@@ -1,11 +1,17 @@
 package com.example.hhs.hotelapp;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +30,9 @@ public class Payment extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    int numMessages=0;
+    String noticontent="";
+    NotificationManager mNotificationManager;
     private static String LOG_TAG = "CardViewActivity";
     TextView pay;
 
@@ -39,6 +48,11 @@ public class Payment extends AppCompatActivity {
        // mAdapter = new MyRecyclerViewAdapter(getDataSet());
         mAdapter = new MyRecyclerViewAdapter(Dist.foods);
         mRecyclerView.setAdapter(mAdapter);
+        for(int i=0;i<Dist.foods.size();i++)
+        {
+            noticontent=noticontent+Dist.foods.get(i).getmText1()+" - "+Dist.foods.get(i).getmText3()+"\n";
+        }
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -54,7 +68,8 @@ public class Payment extends AppCompatActivity {
                 dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(Payment.this,"Thank you !",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Payment.this,"Thank you ! Payment Succesfull!",Toast.LENGTH_SHORT).show();
+                        displayNotification();
                     }
                 })
                         .setNegativeButton("No ", new DialogInterface.OnClickListener() {
@@ -95,5 +110,29 @@ public class Payment extends AppCompatActivity {
             results.add(index, obj);
         }
         return results;
+    }
+    protected void displayNotification() {
+        Log.i("Start", "notification");
+
+   /* Invoking the default notification service */
+
+
+        Intent intent = new Intent(getApplicationContext(),Payment.class);
+
+        PendingIntent pendingIntent = PendingIntent
+                .getActivity(getApplicationContext(),
+                        0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        android.app.Notification notification = new android.app.Notification.Builder(getApplicationContext())
+                .setTicker("Food Order")
+                .setContentTitle("Vibes")
+                .setContentText("Your food order is complete!!")
+                .setStyle(new Notification.BigTextStyle()
+                        .bigText(noticontent))
+                .setSmallIcon(R.drawable.food2)
+                .setContentIntent(pendingIntent).getNotification();
+
+        notification.flags = android.app.Notification.FLAG_AUTO_CANCEL;
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(5, notification);
     }
 }
