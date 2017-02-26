@@ -26,6 +26,8 @@ public class MyRecyclerViewAdapter extends RecyclerView
     private static String LOG_TAG = "MyRecyclerViewAdapter";
     private ArrayList<DataObject> mDataset,fooddata;
     int quant;
+    int imgind=0;
+    public int[]imgs={R.drawable.food1,R.drawable.food2,R.drawable.food3,R.drawable.food4,R.drawable.food5};
     private static MyClickListener myClickListener;
 
 
@@ -79,6 +81,12 @@ public class MyRecyclerViewAdapter extends RecyclerView
         holder.name.setText(mDataset.get(position).getmText1());
         holder.desc.setText(mDataset.get(position).getmText2());
         holder.price.setText(mDataset.get(position).getmText3());
+        holder.imageView.setImageResource(imgs[imgind]);
+        imgind++;
+        if(imgind==5)
+        {
+            imgind=0;
+        }
         holder.order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
